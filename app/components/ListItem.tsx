@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useState } from "react";
 import Checkbox from "expo-checkbox";
 import { database, config } from "@/lib/appwrite";
@@ -28,10 +28,16 @@ const ListItem = ({ task }: ListItemProps) => {
   };
 
   return (
-    <View style={styles.itemWrapper}>
-      <Checkbox value={check} onValueChange={handleUpdate} />
-      <TestComponent fontSize={18}>{body}</TestComponent>
-    </View>
+    <TouchableOpacity onPress={handleUpdate} style={styles.itemWrapper}>
+      <Checkbox
+        value={check}
+        onValueChange={handleUpdate}
+        color={check ? "#3498db" : "#bdc3c7"} // Blue when checked else gray!
+      />
+      <TestComponent style={check ? styles.completedText : styles.text} fontSize={18}>
+        {body}
+      </TestComponent>
+    </TouchableOpacity>
   );
 };
 
@@ -39,10 +45,25 @@ const styles = StyleSheet.create({
   itemWrapper: {
     display: "flex",
     flexDirection: "row",
-    alignItems: "flex-start",
+    alignItems: "center",
     gap: 10,
     paddingHorizontal: 15,
-    paddingVertical: 5,
+    paddingVertical: 10,
+    backgroundColor: "#ecf0f1",
+    borderRadius: 8,
+    marginVertical: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  text: {
+    color: "#2c3e50",
+  },
+  completedText: {
+    color: "#7f8c8d", // Gray color for completed
+    textDecorationLine: "line-through",
   },
 });
 

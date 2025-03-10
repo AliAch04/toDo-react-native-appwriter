@@ -23,9 +23,9 @@ export default function Index() {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        {error && <Text>{JSON.stringify(error)}</Text>}
+        {error && <Text style={styles.errorText}>{JSON.stringify(error)}</Text>}
         <TestComponent style={styles.headline} fontSize={22}>
           ToDo List:
         </TestComponent>
@@ -33,6 +33,7 @@ export default function Index() {
           data={tasks}
           renderItem={({ item }) => <ListItem task={item} />}
           keyExtractor={(item) => item.$id}
+          contentContainerStyle={styles.listContainer}
         />
       </View>
     </SafeAreaView>
@@ -40,10 +41,25 @@ export default function Index() {
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: "#f5f6fa", // Light background color
+  },
   container: {
+    flex: 1,
     paddingHorizontal: 20,
+    paddingTop: 20,
   },
   headline: {
     paddingVertical: 20,
+    color: "#3498db", // Blue color for the headline
+  },
+  listContainer: {
+    paddingBottom: 20,
+  },
+  errorText: {
+    color: "#e74c3c", // Red color for errors
+    textAlign: "center",
+    marginVertical: 10,
   },
 });

@@ -1,4 +1,4 @@
-import { Text, StyleProp, TextStyle } from "react-native";
+import { Text, StyleProp, TextStyle, StyleSheet } from "react-native";
 import React from "react";
 
 interface TestComponentProps {
@@ -8,7 +8,14 @@ interface TestComponentProps {
 }
 
 const TestComponent = ({ style, fontSize = 16, children }: TestComponentProps) => {
-  return <Text style={[style, { fontSize }]}>{children}</Text>;
+  return <Text style={[styles.text, style, { fontSize }]}>{children}</Text>;
 };
+
+const styles = StyleSheet.create({
+  text: {
+    fontWeight: "bold",
+    color: "#2c3e50", // Dark blue-gray color
+  },
+});
 
 export default TestComponent;
